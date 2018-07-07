@@ -7,12 +7,10 @@ PORT_NUMBER = 8080
 class MyHandler(BaseHTTPRequestHandler):
 
   def do_GET(self):
-    """Handler for GET requests"""
     self.send_response(200)
-    self.send_header('Content-type','image/png')
+    self.send_header('Content-type','text/plain')
     self.end_headers()
-    with open('logo.png', 'rb') as f:
-      self.wfile.write(f.read())
+    self.wfile.write(b"Hello World!")
 
 try:
   server = HTTPServer(('', PORT_NUMBER), MyHandler)
