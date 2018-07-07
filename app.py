@@ -1,18 +1,17 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
+import os
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
-PORT_NUMBER = 8080
+PORT_NUMBER = int(os.environ.get("PORT") or 8080)
 
 class MyHandler(BaseHTTPRequestHandler):
 
   def do_GET(self):
-    """Handler for GET requests"""
-    self.send_response(200)
-    self.send_header('Content-type','image/png')
+    self.send_header('Content-type','text/html')
     self.end_headers()
-    with open('logo.png', 'rb') as f:
-      self.wfile.write(f.read())
+    self.wfile.write("Hello World!")
+    return
 
 try:
   server = HTTPServer(('', PORT_NUMBER), MyHandler)
